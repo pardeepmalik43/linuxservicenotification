@@ -1,0 +1,9 @@
+DATE=$(date +%m%d%y)
+TIME=$(date +%H%M)
+RECIPIENT=abc@example.com
+
+PID=$(ps -ef | grep supervisor | grep -v grep)
+if [ "${PID}" = "" ]
+   then
+	echo "Supervisor is not working  $TIME on $DATE" | mail -s "Supervisor is down" $RECIPIENT
+fi
