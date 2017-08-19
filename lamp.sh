@@ -121,7 +121,7 @@ echo -e " \n\n\n "
 echo " Please enter the name of user: "
 # Take input from user
 
-usr_name=
+usr_name=accor
 
 # Create a directory for user
 
@@ -131,7 +131,7 @@ mkdir -p /var/www/html/
 useradd $usr_name -d /var/www/html -s /bin/bash
 
 chown -R $usr_name:$usr_name /var/www/html/
-
+usermod -g www-data $usr_name 
 echo "$usr_name:$usr_name-&g67iwtvgyuw6tu&iet6#@"|chpasswd
 
 
@@ -148,6 +148,8 @@ echo "SSH via Password Authentication enabled"
 echo "$usr_name  ALL=NOPASSWD:ALL #Sudo rights for $usr_name  " >>/etc/sudoers
 
 echo "Sudo rights to $usr_name has been been provided with NOPASSWD Authentication"
+### Change apache envvars
+sed -i "s/APACHE_RUN_USER=www-data/APACHE_RUN_USER=$usr_name/" /etc/apache2/envvars
 
 echo -e "\n\n\n\n\n\n"
 
